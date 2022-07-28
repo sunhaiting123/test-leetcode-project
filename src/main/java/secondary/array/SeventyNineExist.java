@@ -40,6 +40,7 @@ public class SeventyNineExist {
         } else if (k == s.length() - 1) {
             return true;
         }
+        //维护一个与 board 等大的 visited 数组，用于标识每个位置是否被访问过。每次遍历相邻位置时，需要跳过已经被访问的位置。
         visited[i][j] = true;
         //方向数组
         int[][] directions = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
