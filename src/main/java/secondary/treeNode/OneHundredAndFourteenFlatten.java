@@ -2,6 +2,9 @@ package secondary.treeNode;
 
 import common.TreeNode;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @description: 114. 二叉树展开为链表
  * @author: sunhaiting
@@ -25,33 +28,34 @@ public class OneHundredAndFourteenFlatten {
 
         flatten(treeNode1);
 
-        System.out.println(treeNode1.value+","+treeNode1.right.value+","+treeNode1.right.right.value);
-        System.out.println(treeNode1.right.right.right.value+","+treeNode1.right.right.right.right.value+","+treeNode1.right.right.right.right.right.value);
+        List<List<Integer>> lists = TreeNode.levelOrder(treeNode1);
+        System.out.println(Arrays.toString(lists.toArray()));
 
     }
 
     /**
      * 相当于二叉树的前序遍历
+     *
      * @param root
      */
     public static void flatten(TreeNode root) {
-        while (root!=null){
+        while (root != null) {
 
-            if(root.left==null){
-                root =root.right;
-            }else {
+            if (root.left == null) {
+                root = root.right;
+            } else {
                 //找到左子树的最右侧节点
                 TreeNode pre = root.left;
-                while (pre.right!=null){
-                    pre=pre.right;
+                while (pre.right != null) {
+                    pre = pre.right;
                 }
                 //将原来的右子树接到左子树的最右边节点
-                pre.right =root.right;
+                pre.right = root.right;
                 // 将左子树插入到右子树的地方
-                root.right=root.left;
-                root.left=null;
+                root.right = root.left;
+                root.left = null;
                 // 考虑下一个节点
-                root =root.right;
+                root = root.right;
 
             }
         }

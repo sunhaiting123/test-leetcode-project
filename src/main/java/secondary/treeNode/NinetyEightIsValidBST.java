@@ -2,8 +2,8 @@ package secondary.treeNode;
 
 import common.TreeNode;
 
+import java.util.Deque;
 import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  * @description: 98. 验证二叉搜索树
@@ -27,7 +27,7 @@ public class NinetyEightIsValidBST {
         treeNode4.right = treeNode5;
         treeNode2.left = treeNode1;
         treeNode2.right = treeNode5;
-        boolean validBST = isValidBST3(treeNode4);
+        boolean validBST = isValidBST4(treeNode4);
         System.out.println(validBST);
 
     }
@@ -59,8 +59,6 @@ public class NinetyEightIsValidBST {
     }
 
 
-
-
     static LinkedList<TreeNode> stack = new LinkedList();
     static LinkedList<Integer> uppers = new LinkedList();
     static LinkedList<Integer> lowers = new LinkedList();
@@ -73,6 +71,7 @@ public class NinetyEightIsValidBST {
 
     /**
      * 迭代
+     *
      * @param root
      * @return
      */
@@ -94,5 +93,31 @@ public class NinetyEightIsValidBST {
         }
         return true;
     }
+
+    /**
+     * 二叉搜索树中序遍历是有序的
+     *
+     * @param root
+     * @return
+     */
+    public static boolean isValidBST4(TreeNode root) {
+        Deque<TreeNode> stack = new LinkedList<>();
+        int a = Integer.MIN_VALUE;
+        while (!stack.isEmpty() || root != null) {
+            if (root != null) {
+                stack.push(root);
+                root = root.left;
+            } else {
+                TreeNode node = stack.pop();
+                // 如果中序遍历得到的节点的值小于等于前一个 inorder，说明不是二叉搜索树
+                if (node.value <= a) return false;
+                a = node.value;
+                root = node.right;
+            }
+        }
+        return true;
+    }
+
+
 
 }

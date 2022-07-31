@@ -2,6 +2,7 @@ package com.test.treenode;
 
 import common.TreeNode;
 
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
@@ -27,7 +28,7 @@ public class IsSymmetric {
         treeNode3.right = treeNode4;
 
 
-        boolean symmetric = isSymmetric(treeNode1);
+        boolean symmetric = isSymmetric2(treeNode1);
         System.out.println(symmetric);
     }
 
@@ -58,6 +59,25 @@ public class IsSymmetric {
             queue.add(b.right);
             queue.add(a.right);
             queue.add(b.left);
+        }
+        return true;
+    }
+
+    public static boolean isSymmetric2(TreeNode root) {
+        if (root == null) return true;
+        Deque<TreeNode> queue = new LinkedList<>();
+        queue.add(root.left);
+        queue.add(root.right);
+        while (!queue.isEmpty()) {
+            TreeNode node1 = queue.poll();
+            TreeNode node2 = queue.poll();
+            if (node1 == null && node2 == null) return true;
+            if (node1 == null || node2 == null) return false;
+            if (node1.value != node2.value) return false;
+            queue.add(node1.left);
+            queue.add(node2.right);
+            queue.add(node1.right);
+            queue.add(node2.left);
         }
         return true;
     }

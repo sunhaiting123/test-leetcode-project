@@ -1,6 +1,10 @@
 package test;
 
+import com.sun.org.apache.regexp.internal.REUtil;
 import common.ListNode;
+import common.TreeNode;
+import javafx.util.Pair;
+import scala.runtime.RichBoolean;
 
 import java.util.*;
 
@@ -83,10 +87,190 @@ public class Top100 {
 //        int i = climbStairs(3);
 //        System.out.println(i);
 
-        int[] nums ={1,2,3};
-        List<List<Integer>> subsets = subsets2(nums);
-        System.out.println(Arrays.toString(subsets.toArray()));
+//        int[] nums = {1, 2, 3};
+//        List<List<Integer>> subsets = subsets2(nums);
+//        System.out.println(Arrays.toString(subsets.toArray()));
 
+        TreeNode treeNode1 = new TreeNode(1);
+        TreeNode treeNode2 = new TreeNode(2);
+        TreeNode treeNode3 = new TreeNode(3);
+        TreeNode treeNode4 = new TreeNode(4);
+        TreeNode treeNode5 = new TreeNode(5);
+        TreeNode treeNode6 = new TreeNode(6);
+        TreeNode treeNode7 = new TreeNode(7);
+        TreeNode treeNode8 = new TreeNode(8);
+        treeNode1.left = treeNode2;
+        treeNode1.right = treeNode3;
+        treeNode2.left = treeNode4;
+        treeNode2.right = treeNode5;
+        treeNode3.right = treeNode6;
+        treeNode4.left = treeNode7;
+        treeNode4.right = treeNode8;
+        List<List<Integer>> lists = levelOrder(treeNode1);
+        System.out.println(Arrays.toString(lists.toArray()));
+
+
+    }
+
+
+    /**
+     * 121. 买卖股票的最佳时机
+     * @param prices
+     * @return
+     */
+    public static int maxProfit2(int[] prices) {
+        int minPrice = Integer.MAX_VALUE;
+        int maxProfit = 0;
+        for (int i = 0; i < prices.length; i++) {
+            if (prices[i] < minPrice) {
+                minPrice = prices[i];
+            } else {
+                if (prices[i] - minPrice > maxProfit) {
+                    maxProfit = prices[i] - minPrice;
+                }
+
+            }
+        }
+        return maxProfit;
+    }
+
+
+    /**
+     * 114. 二叉树展开为链表
+     *
+     * @param root
+     */
+    public static void flatten(TreeNode root) {
+        while (root != null) {
+            if (root.left == null) {
+                root = root.right;
+            } else {
+                TreeNode pre = root.left;
+                while (pre.right != null) {
+                    pre = pre.right;
+                }
+                pre.right = root.right;
+                root.right = root.left;
+                root.left = null;
+                root = root.right;
+            }
+        }
+    }
+
+
+    /**
+     * 104. 二叉树的最大深度
+     *
+     * @param root
+     * @return
+     */
+    public static int maxDepth(TreeNode root) {
+
+        if (root == null) return 0;
+        Queue<Pair<TreeNode, Integer>> q = new LinkedList<>();
+        q.add(new Pair<>(root, 1));
+        int depth = 0;
+        while (!q.isEmpty()) {
+            Pair<TreeNode, Integer> poll = q.poll();
+            TreeNode node = poll.getKey();
+            Integer value = poll.getValue();
+            depth = Math.max(depth, value);
+
+            if (node.left != null) q.add(new Pair<>(node.left, depth + 1));
+            if (node.right != null) q.add(new Pair<>(node.right, depth + 1));
+        }
+        return depth;
+    }
+
+    /**
+     * 102. 二叉树的层序遍历
+     *
+     * @param root
+     * @return
+     */
+    public static List<List<Integer>> levelOrder(TreeNode root) {
+        if (root == null) return null;
+        List<List<Integer>> res = new ArrayList<>();
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        while (!q.isEmpty()) {
+            List<Integer> list = new ArrayList<>();
+            int len = q.size();
+            for (int i = 0; i < len; i++) {
+                TreeNode node = q.poll();
+                list.add(node.value);
+                if (node.left != null) q.add(node.left);
+                if (node.right != null) q.add(node.right);
+            }
+            res.add(list);
+        }
+        return res;
+    }
+
+
+    /**
+     * 94.二叉树中序遍历
+     *
+     * @param root
+     * @return
+     */
+    public static List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        if (root == null) return list;
+        Deque<TreeNode> stack = new LinkedList<>();
+        while (stack.size() > 0 || root != null) {
+            if (root != null) {
+                stack.push(root);
+                root = root.left;
+            } else {
+                TreeNode node = stack.pop();
+                list.add(node.value);
+                root = node.right;
+            }
+
+        }
+        return list;
+    }
+
+
+    /**
+     * 二叉树顺序遍历
+     *
+     * @param root
+     * @return
+     */
+    public static List<Integer> readLevel(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        if (root == null) return list;
+        Deque<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.pollFirst();
+            list.add(node.value);
+            if (node.left != null) queue.add(node.left);
+            if (node.right != null) queue.add(node.right);
+        }
+        return list;
+    }
+
+    /**
+     * 二叉树前序遍历
+     *
+     * @param root
+     * @return
+     */
+    public static List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        if (root == null) return list;
+        Deque<TreeNode> stack = new LinkedList<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            list.add(node.value);
+            if (node.right != null) stack.push(node.right);
+            if (node.left != null) stack.push(node.left);
+        }
+        return list;
     }
 
 
