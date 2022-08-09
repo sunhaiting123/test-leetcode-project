@@ -11,7 +11,7 @@ import java.util.Deque;
 public class EightyFourLargestRectangleArea {
     public static void main(String[] args) {
 //        int[] nums = {2, 1, 5, 6, 2, 3};
-        int[] nums = {3, 1, 3, 2, 2};
+        int[] nums = {1,3,2,3,5,4};
         int i = largestRectangleArea3(nums);
         System.out.println(i);
     }

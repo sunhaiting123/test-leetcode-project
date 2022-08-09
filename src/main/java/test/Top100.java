@@ -91,30 +91,55 @@ public class Top100 {
 //        List<List<Integer>> subsets = subsets2(nums);
 //        System.out.println(Arrays.toString(subsets.toArray()));
 
-        TreeNode treeNode1 = new TreeNode(1);
-        TreeNode treeNode2 = new TreeNode(2);
-        TreeNode treeNode3 = new TreeNode(3);
-        TreeNode treeNode4 = new TreeNode(4);
-        TreeNode treeNode5 = new TreeNode(5);
-        TreeNode treeNode6 = new TreeNode(6);
-        TreeNode treeNode7 = new TreeNode(7);
-        TreeNode treeNode8 = new TreeNode(8);
-        treeNode1.left = treeNode2;
-        treeNode1.right = treeNode3;
-        treeNode2.left = treeNode4;
-        treeNode2.right = treeNode5;
-        treeNode3.right = treeNode6;
-        treeNode4.left = treeNode7;
-        treeNode4.right = treeNode8;
-        List<List<Integer>> lists = levelOrder(treeNode1);
-        System.out.println(Arrays.toString(lists.toArray()));
-
+//        TreeNode treeNode1 = new TreeNode(1);
+//        TreeNode treeNode2 = new TreeNode(2);
+//        TreeNode treeNode3 = new TreeNode(3);
+//        TreeNode treeNode4 = new TreeNode(4);
+//        TreeNode treeNode5 = new TreeNode(5);
+//        TreeNode treeNode6 = new TreeNode(6);
+//        TreeNode treeNode7 = new TreeNode(7);
+//        TreeNode treeNode8 = new TreeNode(8);
+//        treeNode1.left = treeNode2;
+//        treeNode1.right = treeNode3;
+//        treeNode2.left = treeNode4;
+//        treeNode2.right = treeNode5;
+//        treeNode3.right = treeNode6;
+//        treeNode4.left = treeNode7;
+//        treeNode4.right = treeNode8;
+//        List<List<Integer>> lists = levelOrder(treeNode1);
+//        System.out.println(Arrays.toString(lists.toArray()));
+        int[]nums = {2,2,1,1,1,2,2};
+        int i = majorityElement(nums);
+        System.out.println(i);
 
     }
 
 
     /**
+     * 169. 多数元素
+     *
+     * @param nums
+     * @return
+     */
+    public static int majorityElement(int[] nums) {
+        int count = 0;
+        int res = 0;
+        for (int num : nums) {
+            if (count == 0) {
+                res = num;
+            }
+            if (num == res) {
+                count++;
+            } else {
+                count--;
+            }
+        }
+        return res;
+    }
+
+    /**
      * 121. 买卖股票的最佳时机
+     *
      * @param prices
      * @return
      */
