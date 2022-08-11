@@ -1,10 +1,8 @@
 package test;
 
-import com.sun.org.apache.regexp.internal.REUtil;
 import common.ListNode;
 import common.TreeNode;
 import javafx.util.Pair;
-import scala.runtime.RichBoolean;
 
 import java.util.*;
 
@@ -108,10 +106,58 @@ public class Top100 {
 //        treeNode4.right = treeNode8;
 //        List<List<Integer>> lists = levelOrder(treeNode1);
 //        System.out.println(Arrays.toString(lists.toArray()));
-        int[]nums = {2,2,1,1,1,2,2};
-        int i = majorityElement(nums);
-        System.out.println(i);
+//        int[] nums = {2, 2, 1, 1, 1, 2, 2};
+//        int i = majorityElement(nums);
+//        System.out.println(i);
 
+
+        int[] nums = {1, 2, 3, 3, 2, 1};
+        ListNode listNode = ListNode.arrayToListNode(nums);
+        Boolean palindrome = isPalindrome(listNode);
+        System.out.println(palindrome);
+
+
+    }
+
+
+    /**
+     * 234.回文链表
+     *
+     * @param head
+     * @return
+     */
+    public static Boolean isPalindrome(ListNode head) {
+
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+        ListNode fast = dummy;
+        ListNode slow = dummy;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        fast = slow.next;
+        slow.next = null;
+        slow = dummy.next;
+
+        ListNode pre = null;
+        while (fast != null) {
+            ListNode tmp = fast.next;
+            fast.next = pre;
+            pre = fast;
+            fast = tmp;
+        }
+        while (pre != null && slow != null) {
+            if (pre.value != slow.value) {
+                return false;
+            } else {
+                pre = pre.next;
+                slow = slow.next;
+            }
+        }
+        return true;
     }
 
 

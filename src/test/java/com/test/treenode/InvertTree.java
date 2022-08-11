@@ -34,7 +34,6 @@ public class InvertTree {
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
         while (!queue.isEmpty()) {
-
             TreeNode node = queue.poll();
             TreeNode temp = node.left;
             node.left = node.right;
