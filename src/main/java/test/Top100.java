@@ -5,6 +5,7 @@ import common.TreeNode;
 import javafx.util.Pair;
 
 import java.util.*;
+import java.util.zip.CheckedOutputStream;
 
 
 /**
@@ -111,12 +112,76 @@ public class Top100 {
 //        System.out.println(i);
 
 
-        int[] nums = {1, 2, 3, 3, 2, 1};
-        ListNode listNode = ListNode.arrayToListNode(nums);
-        Boolean palindrome = isPalindrome(listNode);
-        System.out.println(palindrome);
+//        int[] nums = {1, 2, 3, 3, 2, 1};
+//        ListNode listNode = ListNode.arrayToListNode(nums);
+//        Boolean palindrome = isPalindrome(listNode);
+//        System.out.println(palindrome);
 
 
+        TreeNode treeNode1 = new TreeNode(10);
+        TreeNode treeNode2 = new TreeNode(5);
+        TreeNode treeNode3 = new TreeNode(-3);
+        TreeNode treeNode4 = new TreeNode(3);
+        TreeNode treeNode5 = new TreeNode(2);
+        TreeNode treeNode6 = new TreeNode(11);
+        TreeNode treeNode7 = new TreeNode(3);
+        TreeNode treeNode8 = new TreeNode(-2);
+        TreeNode treeNode9 = new TreeNode(1);
+
+        treeNode1.left=treeNode2;
+        treeNode1.right=treeNode3;
+        treeNode2.left=treeNode4;
+        treeNode2.right=treeNode5;
+        treeNode3.right=treeNode6;
+        treeNode4.left=treeNode7;
+        treeNode4.right=treeNode8;
+        treeNode5.right=treeNode9;
+        int i = pathSum(treeNode1, 8);
+        System.out.println(i);
+
+    }
+
+
+    /**
+     * 437. 路径总和 III
+     *
+     * @param root
+     * @param sum
+     * @return
+     */
+    public static int pathSum(TreeNode root, int sum) {
+        int count = 0;
+        List<TreeNode> list = new ArrayList<>();
+        LinkedList<TreeNode> stack = new LinkedList<>();
+
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.removeLast();
+            if (node.right != null) {
+                stack.addLast(node.right);
+            }
+            if (node.left != null) {
+                stack.addLast(node.left);
+            }
+            if (list.size() != 0) {
+                while (true) {
+                    if (list.get(list.size() - 1).left == node || list.get(list.size() - 1).right == node) {
+                        break;
+                    } else {
+                        list.remove(list.size() - 1);
+                    }
+                }
+            }
+            list.add(node);
+            int tmp = 0;
+            for (int i = list.size() - 1; i >= 0; i--) {
+                tmp += list.get(i).value;
+                if (tmp == sum) {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 
 

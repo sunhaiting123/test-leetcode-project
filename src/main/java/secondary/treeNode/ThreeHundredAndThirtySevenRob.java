@@ -15,7 +15,7 @@ import java.util.HashMap;
  * @author: sunhaiting
  * @create: 2020-07-07 10:20
  **/
-public class ThreeHundredAndThirtyThreeRob {
+public class ThreeHundredAndThirtySevenRob {
     public static void main(String[] args) {
 
         TreeNode treeNode1 = new TreeNode(1);

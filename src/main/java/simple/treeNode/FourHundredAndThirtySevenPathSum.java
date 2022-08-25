@@ -57,6 +57,7 @@ public class FourHundredAndThirtySevenPathSum {
      * 2.  5 -> 2 -> 1
      * 3.  -3 -> 11
      *
+     * 二叉树的前序遍历
      * @param root
      * @param sum
      * @return
@@ -80,7 +81,7 @@ public class FourHundredAndThirtySevenPathSum {
             if (list.size() != 0) {
                 while (true) {
                     // 如果当前节点是路径pathList的子节点，是左或者右节点，
-                    //我们什么都不做break，随后把当前节点加入pathList
+                    //我们什么都不做break，随后把当前节点加入list
                     if (list.get(list.size() - 1).left == node || list.get(list.size() - 1).right == node) {
                         break;
                     } else {

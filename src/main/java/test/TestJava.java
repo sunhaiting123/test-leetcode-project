@@ -1,6 +1,8 @@
 package test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @description:
@@ -9,11 +11,11 @@ import java.util.ArrayList;
  **/
 public class TestJava {
     public static void main(String[] args) {
-        int sum = 0;//记录总值
-        for(int i=1;i<100;i++){
-            sum += i/2!=0 ?i:-i;
-        }
-        System.out.println(sum);
+//        int sum = 0;//记录总值
+//        for (int i = 1; i < 100; i++) {
+//            sum += i / 2 != 0 ? i : -i;
+//        }
+//        System.out.println(sum);
 
 
 //        for (int i = 0; i < 3; i++) {
@@ -32,11 +34,11 @@ public class TestJava {
 //        arrayList.size();
 
 
-        for (int i = (int) Math.pow(2, 3); i < (int) Math.pow(2, 3 + 1); ++i) {
-            //十进制数转换成二进制
-            String bitmask = Integer.toBinaryString(i).substring(1);
-            System.out.println("i:" + i + "====" + bitmask);
-        }
+//        for (int i = (int) Math.pow(2, 3); i < (int) Math.pow(2, 3 + 1); ++i) {
+//            //十进制数转换成二进制
+//            String bitmask = Integer.toBinaryString(i).substring(1);
+//            System.out.println("i:" + i + "====" + bitmask);
+//        }
 
 
 //        int[] nums ={6,1,2,7,9,3,4,5,10,8};
@@ -45,7 +47,6 @@ public class TestJava {
 //            System.out.println(i);
 //        }
 
-    }
 
 //    public static int[] sort(int[] nums) {
 //        return sortBetween(nums, 0, nums.length-1);
@@ -84,4 +85,25 @@ public class TestJava {
 //        sortBetween(nums, j + 1, high);
 //        return nums;
 //    }
+
+
+        int[] nums ={1,2,3,1,2,3};
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            map.put(nums[i], map.getOrDefault(nums[i],0)+1);
+        }
+
+        System.out.println(map.get(1));
+
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append(1);
+        stringBuffer.append(2);
+        stringBuffer.append(3);
+        StringBuffer reverse = stringBuffer.reverse();
+
+        System.out.println(reverse.toString());
+
+
+    }
 }

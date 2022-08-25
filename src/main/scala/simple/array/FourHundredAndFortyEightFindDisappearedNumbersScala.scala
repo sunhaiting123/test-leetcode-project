@@ -13,7 +13,7 @@ import scala.collection.mutable
   * @author: sunhaiting
   * @create: 2020-02-28 16:33
   **/
-object FourHundredAndFortyEightFindDisappearedNumbers {
+object FourHundredAndFortyEightFindDisappearedNumbersScala {
   def main(args: Array[String]): Unit = {
     val nums = Array(1, 3, 3, 5, 4, 7, 3)
     val ints = findDisappearedNumbers(nums)
